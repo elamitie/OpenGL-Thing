@@ -4,32 +4,36 @@
 #include <vector>
 #include <algorithm>
 
-enum Button
-{
-	LEFT = SDL_BUTTON_LEFT,
-	RIGHT = SDL_BUTTON_RIGHT,
-	MIDDLE = SDL_BUTTON_MIDDLE
-};
+namespace lamengine {
 
-class Mouse
-{
-public:
-	Mouse();
-	~Mouse();
+	enum Button
+	{
+		LEFT = SDL_BUTTON_LEFT,
+		RIGHT = SDL_BUTTON_RIGHT,
+		MIDDLE = SDL_BUTTON_MIDDLE
+	};
 
-	void handleMouseDown(const SDL_Event& ev);
-	void handleMouseUp(const SDL_Event& ev);
+	class Mouse
+	{
+	public:
+		Mouse();
+		~Mouse();
 
-	static bool clicked(unsigned int button);
-	static int getDX();
-	static int getDY();
-	static int getMouseButton();
-	static bool mouseGrabbed();
+		void handleMouseDown(const SDL_Event& ev);
+		void handleMouseUp(const SDL_Event& ev);
 
-private:
-	static std::vector<unsigned int> mClickedButtons;
-	static int						 mX;
-	static int						 mY;
-	static int						 mButton;
-	static bool						 mGrabbed;
-};
+		static bool clicked(unsigned int button);
+		static int getDX();
+		static int getDY();
+		static int getMouseButton();
+		static bool mouseGrabbed();
+
+	private:
+		static std::vector<unsigned int> mClickedButtons;
+		static int						 mX;
+		static int						 mY;
+		static int						 mButton;
+		static bool						 mGrabbed;
+	};
+
+}

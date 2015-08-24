@@ -2,11 +2,15 @@
 
 #include "TextureCache.h"
 
-class ResourceManager
-{
-public:
-	static Texture getTexture(const std::string& filepath);
+namespace lamengine {
 
-private:
-	static TextureCache mTextureCache;
-};
+	class ResourceManager
+	{
+	public:
+		static Texture getTexture(const std::string& filepath);
+
+	private:
+		static TextureCache mTextureCache;
+	};
+
+}

@@ -3,27 +3,31 @@
 #include <GL/glew.h>
 #include <string>
 
-class Shader
-{
-public:
-	Shader();
-	~Shader();
+namespace lamengine {
 
-	void compile(const std::string& vertPath, const std::string& fragPath);
-	void link();
-	void addAttribute(const std::string& attrib);
+	class Shader
+	{
+	public:
+		Shader();
+		~Shader();
 
-	GLint getUniformLocation(const std::string& uniformName);
+		void compile(const std::string& vertPath, const std::string& fragPath);
+		void link();
+		void addAttribute(const std::string& attrib);
 
-	void enable();
-	void disable();
+		GLint getUniformLocation(const std::string& uniformName);
 
-private:
-	void compileShader(const std::string& path, GLuint& id);
+		void enable();
+		void disable();
 
-	GLuint mProgram;
-	GLuint mVert;
-	GLuint mFrag;
-	int    mNumAttributes;
-};
+	private:
+		void compileShader(const std::string& path, GLuint& id);
+
+		GLuint mProgram;
+		GLuint mVert;
+		GLuint mFrag;
+		int    mNumAttributes;
+	};
+
+}
 

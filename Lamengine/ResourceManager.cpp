@@ -1,8 +1,12 @@
 #include "ResourceManager.h"
 
-TextureCache ResourceManager::mTextureCache;
+namespace lamengine {
 
-Texture ResourceManager::getTexture(const std::string& filepath)
-{
-	return mTextureCache.getTexture(filepath);
+	TextureCache ResourceManager::mTextureCache;
+
+	Texture ResourceManager::getTexture(const std::string& filepath)
+	{
+		return mTextureCache.getTexture(filepath);
+	}
+
 }

@@ -3,14 +3,18 @@
 #include "Texture.h"
 #include <map>
 
-class TextureCache
-{
-public:
-	TextureCache();
-	~TextureCache();
+namespace lamengine {
 
-	Texture getTexture(const std::string& filepath);
+	class TextureCache
+	{
+	public:
+		TextureCache();
+		~TextureCache();
 
-private:
-	std::map<std::string, Texture> mTextureMap;
-};
+		Texture getTexture(const std::string& filepath);
+
+	private:
+		std::map<std::string, Texture> mTextureMap;
+	};
+
+}

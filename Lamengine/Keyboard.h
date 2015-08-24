@@ -5,35 +5,39 @@
 #include <algorithm>
 #include <iostream>
 
-enum Key
-{
-	W = SDL_SCANCODE_W,
-	A = SDL_SCANCODE_A,
-	S = SDL_SCANCODE_S,
-	D = SDL_SCANCODE_D,
-	RIGHT_ARROW = SDL_SCANCODE_RIGHT,
-	LEFT_ARROW = SDL_SCANCODE_LEFT,
-	UP_ARROW = SDL_SCANCODE_UP,
-	DOWN_ARROW = SDL_SCANCODE_DOWN,
-	SPACE = SDL_SCANCODE_SPACE,
-	ENTER = SDL_SCANCODE_RETURN
-};
+namespace lamengine {
 
-class Keyboard
-{
-public:
-	Keyboard();
-	~Keyboard();
+	enum Key
+	{
+		W = SDL_SCANCODE_W,
+		A = SDL_SCANCODE_A,
+		S = SDL_SCANCODE_S,
+		D = SDL_SCANCODE_D,
+		RIGHT_ARROW = SDL_SCANCODE_RIGHT,
+		LEFT_ARROW = SDL_SCANCODE_LEFT,
+		UP_ARROW = SDL_SCANCODE_UP,
+		DOWN_ARROW = SDL_SCANCODE_DOWN,
+		SPACE = SDL_SCANCODE_SPACE,
+		ENTER = SDL_SCANCODE_RETURN
+	};
 
-	void handleKeyDown(const SDL_Event& ev);
-	void handleKeyUp(const SDL_Event& ev);
+	class Keyboard
+	{
+	public:
+		Keyboard();
+		~Keyboard();
 
-	//std::vector<Key> getPressedKeys();
+		void handleKeyDown(const SDL_Event& ev);
+		void handleKeyUp(const SDL_Event& ev);
 
-	static bool pressed(Key key);
-	static bool clicked(Key key);
+		//std::vector<Key> getPressedKeys();
 
-private:
-	static bool             mKeys[65536];
-	static std::vector<Key> mPressedKeys;
-};
+		static bool pressed(Key key);
+		static bool clicked(Key key);
+
+	private:
+		static bool             mKeys[65536];
+		static std::vector<Key> mPressedKeys;
+	};
+
+}

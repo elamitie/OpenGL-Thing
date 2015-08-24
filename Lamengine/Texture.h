@@ -2,9 +2,13 @@
 
 #include <GL/glew.h>
 
-struct Texture
-{
-	GLuint id;
-	int    width;
-	int    height;
-};
+namespace lamengine {
+
+	struct Texture
+	{
+		GLuint id;
+		int    width;
+		int    height;
+	};
+
+}

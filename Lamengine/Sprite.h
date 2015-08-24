@@ -4,21 +4,25 @@
 #include "ResourceManager.h"
 #include <string>
 
-class Sprite
-{
-public:
-	Sprite();
-	~Sprite();
+namespace lamengine {
 
-	void init(float x, float y, float width, float height, const std::string& texturePath);
-	void draw();
+	class Sprite
+	{
+	public:
+		Sprite();
+		~Sprite();
 
-private:
-	float mX;
-	float mY;
-	float mWidth;
-	float mHeight;
-	GLuint mVbo;
-	Texture mTexture;
-};
+		void init(float x, float y, float width, float height, const std::string& texturePath);
+		void draw();
+
+	private:
+		float mX;
+		float mY;
+		float mWidth;
+		float mHeight;
+		GLuint mVbo;
+		Texture mTexture;
+	};
+
+}
 

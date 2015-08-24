@@ -8,26 +8,30 @@
 #include "Keyboard.h"
 #include "Mouse.h"
 
-class OpenGLDisplay : public IDisplay
-{
-public:
-	OpenGLDisplay(int width, int height, const std::string& title);
-	~OpenGLDisplay();
+namespace lamengine {
 
-	void update() override;
-	void swapBuffers() override;
+	class OpenGLDisplay : public IDisplay
+	{
+	public:
+		OpenGLDisplay(int width, int height, const std::string& title);
+		~OpenGLDisplay();
 
-	bool isClosed() override;
-	void dispose() override;
-	void clear() override;
+		void update() override;
+		void swapBuffers() override;
 
-private:
-	SDL_Window*    mWindow;
-	SDL_GLContext  mContext;
-	int			   mWidth;
-	int			   mHeight;
-	bool           mClosed;
-	std::string    mTitle;
-	Keyboard	   mKeyboard;
-	Mouse		   mMouse;
-};
+		bool isClosed() override;
+		void dispose() override;
+		void clear() override;
+
+	private:
+		SDL_Window*    mWindow;
+		SDL_GLContext  mContext;
+		int			   mWidth;
+		int			   mHeight;
+		bool           mClosed;
+		std::string    mTitle;
+		Keyboard	   mKeyboard;
+		Mouse		   mMouse;
+	};
+
+}

@@ -4,14 +4,18 @@
 #include <iostream>
 #include <SDL/SDL.h>
 
-void fatalError(std::string errorString) 
-{
-	std::cout << errorString << std::endl;
-	std::cout << "Enter any key to quit...";
+namespace lamengine {
 
-	int tmp;
-	std::cin >> tmp;
+	void fatalError(std::string errorString)
+	{
+		std::cout << errorString << std::endl;
+		std::cout << "Enter any key to quit...";
 
-	SDL_Quit();
-	exit(69);
+		int tmp;
+		std::cin >> tmp;
+
+		SDL_Quit();
+		exit(69);
+	}
+
 }

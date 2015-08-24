@@ -1,24 +1,28 @@
 #include "TextureCache.h"
 #include "ImageLoader.h"
 
-TextureCache::TextureCache()
-{
-}
+namespace lamengine {
 
-TextureCache::~TextureCache()
-{
-}
-
-Texture TextureCache::getTexture(const std::string& filepath)
-{
-	auto iterator = mTextureMap.find(filepath);
-
-	if (iterator == mTextureMap.end())
+	TextureCache::TextureCache()
 	{
-		Texture tex = ImageLoader::loadPNG(filepath);
-		mTextureMap.insert(std::make_pair(filepath, tex));
-		return tex;
 	}
 
-	return iterator->second;
+	TextureCache::~TextureCache()
+	{
+	}
+
+	Texture TextureCache::getTexture(const std::string& filepath)
+	{
+		auto iterator = mTextureMap.find(filepath);
+
+		if (iterator == mTextureMap.end())
+		{
+			Texture tex = ImageLoader::loadPNG(filepath);
+			mTextureMap.insert(std::make_pair(filepath, tex));
+			return tex;
+		}
+
+		return iterator->second;
+	}
+
 }
