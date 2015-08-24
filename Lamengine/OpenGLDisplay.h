@@ -10,10 +10,12 @@
 
 namespace lamengine {
 
+	enum DisplayFlags { NONE = 0x0, INVISIBLE = 0x1, FULLSCREEN = 0x2, BORDERLESS = 0x4 };
+
 	class OpenGLDisplay : public IDisplay
 	{
 	public:
-		OpenGLDisplay(int width, int height, const std::string& title);
+		OpenGLDisplay(int width, int height, const std::string& title, unsigned int flags = NONE);
 		~OpenGLDisplay();
 
 		void update() override;

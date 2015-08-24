@@ -1,28 +1,45 @@
 #include "OpenGLDisplay.h"
+#include "Error.h"
 #include <iostream>
 
 namespace lamengine {
 
-	OpenGLDisplay::OpenGLDisplay(int width, int height, const std::string& title)
+	OpenGLDisplay::OpenGLDisplay(int width, int height, const std::string& title, unsigned int flags)
 	{
+		Uint32 sdlflags = SDL_WINDOW_OPENGL;
+
 		mWidth = width;
 		mHeight = height;
 		mTitle = title;
 
+		// Handle flags (maybe this could be more elegant
+		if (flags & INVISIBLE)
+		{
+			sdlflags |= SDL_WINDOW_HIDDEN;
+		}
+		if (flags & FULLSCREEN)
+		{
+			sdlflags |= SDL_WINDOW_FULLSCREEN_DESKTOP;
+		}
+		if (flags & BORDERLESS)
+		{
+			sdlflags |= SDL_WINDOW_BORDERLESS;
+		}
+
 		// TODO: Handle errors
 		SDL_Init(SDL_INIT_EVERYTHING);
 
-		mWindow = SDL_CreateWindow(mTitle.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, mWidth, mHeight, SDL_WINDOW_OPENGL);
+		mWindow = SDL_CreateWindow(mTitle.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, mWidth, mHeight, sdlflags);
 		if (mWindow == nullptr)
-			std::cout << "Fatal: Could not create SDL Window" << std::endl;
+			fatalError("Could not create SDL Window!");
 
 		mContext = SDL_GL_CreateContext(mWindow);
 		if (mContext == nullptr)
-			std::cout << "Fatal: Could not create GL Context" << std::endl;
+			fatalError("Could not create GL Context!");
 
 		GLenum error = glewInit();
 		if (error != GLEW_OK)
-			std::cout << "Failed to initialize glew!" << std::endl;
+			fatalError("Failed to initialize GLEW!");
 
 		std::printf("***   OpenGL Version: %s   ***\n", glGetString(GL_VERSION));
 
@@ -30,9 +47,6 @@ namespace lamengine {
 		SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-
-		// Set VSYNC eww
-		//SDL_GL_SetSwapInterval(1);
 	}
 
 	OpenGLDisplay::~OpenGLDisplay()
