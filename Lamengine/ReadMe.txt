@@ -1,29 +1,6 @@
 ========================================================================
-    STATIC LIBRARY : Lamengine Project Overview
+    Lamengine - Also known as Lame Engine
 ========================================================================
-
-AppWizard has created this Lamengine library project for you.
-
-No source files were created as part of your project.
-
-
-Lamengine.vcxproj
-    This is the main project file for VC++ projects generated using an Application Wizard.
-    It contains information about the version of Visual C++ that generated the file, and
-    information about the platforms, configurations, and project features selected with the
-    Application Wizard.
-
-Lamengine.vcxproj.filters
-    This is the filters file for VC++ projects generated using an Application Wizard. 
-    It contains information about the association between the files in your project 
-    and the filters. This association is used in the IDE to show grouping of files with
-    similar extensions under a specific node (for e.g. ".cpp" files are associated with the
-    "Source Files" filter).
-
-/////////////////////////////////////////////////////////////////////////////
-Other notes:
-
-AppWizard uses "TODO:" comments to indicate parts of the source code you
-should add to or customize.
-
-/////////////////////////////////////////////////////////////////////////////
+- Personal learning experience engine in OpenGL
+	- Most of the early code is from Ben Makes Games' engine tutorial series
+- Plans to add to it forever and ever and ever and ever :D
