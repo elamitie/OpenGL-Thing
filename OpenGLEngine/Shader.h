@@ -13,7 +13,7 @@ public:
 	void link();
 	void addAttribute(const std::string& attrib);
 
-	GLuint getUniformLocation(const std::string& uniformName);
+	GLint getUniformLocation(const std::string& uniformName);
 
 	void enable();
 	void disable();

@@ -4,6 +4,10 @@
 #include "IDisplay.h"
 #include "Sprite.h"
 #include "Shader.h"
+#include "Texture.h"
+#include <vector>
+
+using namespace std;
 
 class Engine
 {
@@ -18,8 +22,9 @@ private:
 	void update();
 	void draw();
 
-	IDisplay* mDisplay;
-	double	  mFrametime;
-	Sprite    mSprite;
-	Shader	  mColorShader;
+	IDisplay*         mDisplay;
+	double	          mFrametime;
+	Sprite            mSprite;
+	vector<Sprite*>   mSprites;
+	Shader	          mColorShader;
 };

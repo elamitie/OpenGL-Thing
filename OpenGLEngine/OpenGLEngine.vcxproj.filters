@@ -5,14 +5,17 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="Source Files\core">
-      <UniqueIdentifier>{c8720dff-f660-4c29-8e3e-6daccc6ab9d8}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\rendering">
       <UniqueIdentifier>{14355da4-e2aa-468e-aa0a-2ceebae95d2e}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\input">
       <UniqueIdentifier>{06d335d8-ec7f-4035-a71c-5a227c44fd3a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\util">
+      <UniqueIdentifier>{444e9235-3c63-4e91-a917-3dff62c6366b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\core">
+      <UniqueIdentifier>{c8720dff-f660-4c29-8e3e-6daccc6ab9d8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -36,6 +39,24 @@
     </ClCompile>
     <ClCompile Include="Shader.cpp">
       <Filter>Source Files\rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="IOManager.cpp">
+      <Filter>Source Files\util</Filter>
+    </ClCompile>
+    <ClCompile Include="picoPNG.cpp">
+      <Filter>Source Files\util</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageLoader.cpp">
+      <Filter>Source Files\util</Filter>
+    </ClCompile>
+    <ClCompile Include="Error.cpp">
+      <Filter>Source Files\util</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureCache.cpp">
+      <Filter>Source Files\util</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceManager.cpp">
+      <Filter>Source Files\util</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -62,6 +83,27 @@
     </ClInclude>
     <ClInclude Include="Vertex.h">
       <Filter>Source Files\rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="IOManager.h">
+      <Filter>Source Files\util</Filter>
+    </ClInclude>
+    <ClInclude Include="picoPNG.h">
+      <Filter>Source Files\util</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Source Files\rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageLoader.h">
+      <Filter>Source Files\util</Filter>
+    </ClInclude>
+    <ClInclude Include="Error.h">
+      <Filter>Source Files\util</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceManager.h">
+      <Filter>Source Files\util</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureCache.h">
+      <Filter>Source Files\util</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

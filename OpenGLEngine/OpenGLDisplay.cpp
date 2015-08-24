@@ -28,6 +28,9 @@ OpenGLDisplay::OpenGLDisplay(int width, int height, const std::string& title)
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+
+	// Set VSYNC eww
+	//SDL_GL_SetSwapInterval(1);
 }
 
 OpenGLDisplay::~OpenGLDisplay()

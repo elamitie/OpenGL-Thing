@@ -1,5 +1,6 @@
 #include "Engine.h"
 #include "Keyboard.h"
+#include "ImageLoader.h"
 #include <iostream>
 
 Engine::Engine(IDisplay* display, double framerate)
@@ -10,13 +11,21 @@ Engine::Engine(IDisplay* display, double framerate)
 	mColorShader.compile("Shaders/basic_color.vert", "Shaders/basic_color.frag");
 	mColorShader.addAttribute("vertexPos");
 	mColorShader.addAttribute("vertexColor");
+	mColorShader.addAttribute("vertexUV");
 	mColorShader.link();
 
-	mSprite.init(-1.0f, -1.0f, 2.0f, 2.0f);
+	mSprites.push_back(new Sprite());
+	mSprites.back()->init(-1.0f, -1.0f, 1.0f, 1.0f, "Textures/jimmyjump/PNG/CharacterRight_Standing.png");
+
+	mSprites.push_back(new Sprite());
+	mSprites.back()->init(0.0f, -1.0f, 1.0f, 1.0f, "Textures/jimmyjump/PNG/CharacterRight_Standing.png");
 }
 
 Engine::~Engine()
 {
+	for (auto& s : mSprites)
+		delete s;
+
 	dispose();
 }
 
@@ -77,7 +86,14 @@ void Engine::draw()
 {
 	mDisplay->clear();
 	mColorShader.enable();
-	mSprite.draw();
+	glActiveTexture(GL_TEXTURE0);
+	GLint textureLocation = mColorShader.getUniformLocation("tex");
+	glUniform1i(textureLocation, 0);
+	
+	for (auto& s : mSprites)
+		s->draw();
+
+	glBindTexture(GL_TEXTURE_2D, 0);
 	mColorShader.disable();
 	mDisplay->swapBuffers();
 }
