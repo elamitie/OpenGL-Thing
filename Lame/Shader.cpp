@@ -121,4 +121,22 @@ namespace lame {
 			glDisableVertexAttribArray(i);
 	}
 
+	void Shader::setUniform(const std::string& name, GLint data)
+	{
+		GLint location = this->getUniformLocation(name);
+		glUniform1i(location, data);
+	}
+
+	void Shader::setUniform(const std::string& name, GLfloat data)
+	{
+		GLint location = this->getUniformLocation(name);
+		glUniform1f(location, data);
+	}
+
+	void Shader::setUniform(const std::string& name, const glm::mat4& matrix)
+	{
+		GLint location = this->getUniformLocation(name);
+		glUniformMatrix4fv(location, 1, GL_FALSE, &(matrix[0][0]));
+	}
+
 }

@@ -2,6 +2,7 @@
 
 #include <GL/glew.h>
 #include <string>
+#include <glm/glm.hpp>
 
 namespace lame {
 
@@ -19,6 +20,13 @@ namespace lame {
 
 		void enable();
 		void disable();
+
+		void setUniform(const std::string& name, GLint data);
+		void setUniform(const std::string& name, GLfloat data);
+
+		// -- //
+
+		void setUniform(const std::string& name, const glm::mat4& matrix);
 
 	private:
 		void compileShader(const std::string& path, GLuint& id);

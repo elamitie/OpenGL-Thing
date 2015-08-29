@@ -104,13 +104,10 @@ namespace lame {
 		mDisplay->clear();
 		mColorShader.enable();
 		glActiveTexture(GL_TEXTURE0);
-		GLint textureLocation = mColorShader.getUniformLocation("tex");
-		glUniform1i(textureLocation, 0);
-
-		GLint projection = mColorShader.getUniformLocation("projectionMatrix");
-		glm::mat4 cameraMatrix = mCamera.getCamMatrix();
-
-		glUniformMatrix4fv(projection, 1, GL_FALSE, &(cameraMatrix[0][0]));
+		//GLint textureLocation = mColorShader.getUniformLocation("tex");
+		//glUniform1i(textureLocation, 0);
+		mColorShader.setUniform("tex", 0);
+		mColorShader.setUniform("projectionMatrix", mCamera.getCamMatrix());
 
 		for (auto& s : mSprites)
 			s->draw();

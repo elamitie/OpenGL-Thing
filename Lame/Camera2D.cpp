@@ -21,11 +21,11 @@ namespace lame {
 	{
 		if (mNeedsMatUpdate)
 		{
-			glm::vec3 translate(-mPosition.x, -mPosition.y, 0.0f);
+			glm::vec3 translate(-mPosition.x + mViewportWidth / 2, -mPosition.y + mViewportHeight / 2, 0.0f);
 			mCamMatrix = glm::translate(mOrthoMatrix, translate);
 
 			glm::vec3 scale(mScale, mScale, 0.0f);
-			mCamMatrix = glm::scale(mCamMatrix, scale);
+			mCamMatrix = glm::scale(glm::mat4(1.0f), scale) * mCamMatrix;
 
 			mNeedsMatUpdate = false;
 		}
