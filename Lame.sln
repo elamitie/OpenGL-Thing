@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Sandbox", "Sandbox\Sandbox.vcxproj", "{1FA3AF1F-2063-41D6-9729-F1B7A260007B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{920AE0E8-0804-44E9-983C-7C8B94B8B889} = {920AE0E8-0804-44E9-983C-7C8B94B8B889}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Lame", "Lame\Lame.vcxproj", "{920AE0E8-0804-44E9-983C-7C8B94B8B889}"
 EndProject
