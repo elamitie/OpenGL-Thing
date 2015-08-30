@@ -22,10 +22,12 @@ namespace lame {
 		void disable();
 
 		void setUniform(const std::string& name, GLint data);
+		void setUniform(const std::string& name, GLint* data, GLsizei count);
 		void setUniform(const std::string& name, GLfloat data);
-
-		// -- //
-
+		void setUniform(const std::string& name, GLfloat* data, GLsizei count);
+		void setUniform(const std::string& name, const glm::vec2& vector);
+		void setUniform(const std::string& name, const glm::vec3& vector);
+		void setUniform(const std::string& name, const glm::vec4& vector);
 		void setUniform(const std::string& name, const glm::mat4& matrix);
 
 	private:

@@ -127,10 +127,40 @@ namespace lame {
 		glUniform1i(location, data);
 	}
 
+	void Shader::setUniform(const std::string& name, GLint* data, GLsizei count)
+	{
+		GLint location = this->getUniformLocation(name);
+		glUniform1iv(location, count, data);
+	}
+
 	void Shader::setUniform(const std::string& name, GLfloat data)
 	{
 		GLint location = this->getUniformLocation(name);
 		glUniform1f(location, data);
+	}
+
+	void Shader::setUniform(const std::string& name, GLfloat* data, GLsizei count)
+	{
+		GLint location = this->getUniformLocation(name);
+		glUniform1fv(location, count, data);
+	}
+
+	void Shader::setUniform(const std::string& name, const glm::vec2& vector)
+	{
+		GLint location = this->getUniformLocation(name);
+		glUniform2f(location, vector.x, vector.y);
+	}
+
+	void Shader::setUniform(const std::string& name, const glm::vec3& vector)
+	{
+		GLint location = this->getUniformLocation(name);
+		glUniform3f(location, vector.x, vector.y, vector.z);
+	}
+
+	void Shader::setUniform(const std::string& name, const glm::vec4& vector)
+	{
+		GLint location = this->getUniformLocation(name);
+		glUniform4f(location, vector.x, vector.y, vector.z, vector.w);
 	}
 
 	void Shader::setUniform(const std::string& name, const glm::mat4& matrix)
