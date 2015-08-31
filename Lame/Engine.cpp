@@ -100,28 +100,14 @@ namespace lame {
 		mColorShader.setUniform("tex", 0);
 		mColorShader.setUniform("projectionMatrix", mCamera.getCamMatrix());
 
-		Color color;
-		color.r = 255;
-		color.g = 255;
-		color.b = 255;
-		color.a = 255;
-
 		static Texture tex = ResourceManager::getTexture("Textures/jimmyjump/PNG/CharacterRight_Standing.png");
 
 		mBatch.begin();
-		for (int i = 0; i < 800; i++)
-		{
-			mBatch.draw(glm::vec4(0, 0, 50, 50),
-				glm::vec4(0.0f, 0.0f, 1.0f, 1.0f),
-				tex.id,
-				0.0f,
-				color);
-			mBatch.draw(glm::vec4(50, 0, 50, 50),
-				glm::vec4(0.0f, 0.0f, 1.0f, 1.0f),
-				tex.id,
-				0.0f,
-				color);
-		}
+		mBatch.draw(glm::vec4(0, 0, 50, 50), 
+					glm::vec4(0.0f, 0.0f, 1.0f, 1.0f),
+					tex.id,
+					0.0f,
+					{ 255, 255, 255, 255 } /* Color Initialization C++11 */);
 		mBatch.end();
 		mBatch.renderBatch();
 

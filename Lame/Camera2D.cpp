@@ -31,4 +31,14 @@ namespace lame {
 		}
 	}
 
+	glm::vec2 Camera2D::screenToWorld(glm::vec2 screenCoords)
+	{
+		// Invert Y
+		screenCoords.y = mViewportHeight - screenCoords.y;
+
+		screenCoords -= glm::vec2(mViewportWidth / 2, mViewportHeight / 2);
+		screenCoords /= mScale;
+		screenCoords += mPosition;
+		return screenCoords;
+	}
 }

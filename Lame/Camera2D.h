@@ -14,6 +14,8 @@ namespace lame {
 		void init(int width, int height);
 		void update();
 
+		glm::vec2 screenToWorld(glm::vec2 screenCoords);
+
 		// getters
 		inline glm::vec2 getPosition() { return mPosition; }
 		inline glm::mat4 getCamMatrix() { return mCamMatrix; }

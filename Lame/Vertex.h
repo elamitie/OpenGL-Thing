@@ -12,6 +12,16 @@ namespace lame {
 
 	struct Color
 	{
+		Color() : r(0), g(0), b(0), a(0) {}
+		Color(GLubyte R, GLubyte G, GLubyte B, GLubyte A) :
+			r(R), g(G), b(B), a(A) {}
+
+		static inline Color black() { return Color(0,   0,   0,   255); }
+		static inline Color white() { return Color(255, 255, 255, 255); }
+		static inline Color red()   { return Color(255, 0,   0,   255); }
+		static inline Color green() { return Color(0,   255, 0,   255); }
+		static inline Color blue()  { return Color(0,   0,   255, 255); }
+
 		GLubyte r;
 		GLubyte g;
 		GLubyte b;
