@@ -13,6 +13,7 @@ namespace lame {
 
 	void SpriteBatch::Init()
 	{
+		m_DefaultUV = glm::vec4(0.0f, 0.0f, 1.0f, 1.0f);
 		createVertexArray();
 	}
 
@@ -33,7 +34,7 @@ namespace lame {
 		createRenderBatches();
 	}
 
-	void SpriteBatch::Draw(const glm::vec4& destRect, const glm::vec4& uvRect, GLuint texture, float depth, const Color& color)
+	void SpriteBatch::Draw(const glm::vec4& destRect, Texture texture, float depth, const Color& color)
 	{
 		Glyph* glyph = new Glyph;
 		glyph->texture = texture;
@@ -41,19 +42,19 @@ namespace lame {
 
 		glyph->topLeft.color = color;
 		glyph->topLeft.SetPosition(destRect.x, destRect.y + destRect.w);
-		glyph->topLeft.SetUV(uvRect.x, uvRect.y + uvRect.w);
+		glyph->topLeft.SetUV(m_DefaultUV.x, m_DefaultUV.y + m_DefaultUV.w);
 
 		glyph->bottomLeft.color = color;
 		glyph->bottomLeft.SetPosition(destRect.x, destRect.y);
-		glyph->bottomLeft.SetUV(uvRect.x, uvRect.y);
+		glyph->bottomLeft.SetUV(m_DefaultUV.x, m_DefaultUV.y);
 
 		glyph->bottomRight.color = color;
 		glyph->bottomRight.SetPosition(destRect.x + destRect.z, destRect.y);
-		glyph->bottomRight.SetUV(uvRect.x + uvRect.z, uvRect.y);
+		glyph->bottomRight.SetUV(m_DefaultUV.x + m_DefaultUV.z, m_DefaultUV.y);
 
 		glyph->topRight.color = color;
 		glyph->topRight.SetPosition(destRect.x + destRect.z, destRect.y + destRect.w);
-		glyph->topRight.SetUV(uvRect.x + uvRect.z, uvRect.y + uvRect.w);
+		glyph->topRight.SetUV(m_DefaultUV.x + m_DefaultUV.z, m_DefaultUV.y + m_DefaultUV.w);
 
 		m_Glyphs.push_back(glyph);
 	}
@@ -64,7 +65,7 @@ namespace lame {
 
 		for (unsigned int i = 0; i < m_Batches.size(); i++)
 		{
-			glBindTexture(GL_TEXTURE_2D, m_Batches[i].mTexture);
+			glBindTexture(GL_TEXTURE_2D, m_Batches[i].mTexture.GetID());
 			glDrawArrays(GL_TRIANGLES, m_Batches[i].mOffset, m_Batches[i].mNumVerts);
 		}
 
@@ -92,7 +93,7 @@ namespace lame {
 
 		for (unsigned int cg = 1; cg < m_Glyphs.size(); cg++)
 		{
-			if (m_Glyphs[cg]->texture != m_Glyphs[cg - 1]->texture)
+			if (m_Glyphs[cg]->texture.GetID() != m_Glyphs[cg - 1]->texture.GetID())
 				m_Batches.emplace_back(offset, 6, m_Glyphs[cg]->texture);
 			else
 				m_Batches.back().mNumVerts += 6;
@@ -169,6 +170,6 @@ namespace lame {
 
 	bool SpriteBatch::compareTexture(Glyph* a, Glyph* b)
 	{
-		return (a->texture < b->texture);
+		return (a->texture.GetID() < b->texture.GetID());
 	}
 }

@@ -63,7 +63,7 @@ namespace lame {
 
 	void Sprite::Draw()
 	{
-		glBindTexture(GL_TEXTURE_2D, m_Texture.id);
+		glBindTexture(GL_TEXTURE_2D, m_Texture.GetID());
 
 		glBindBuffer(GL_ARRAY_BUFFER, m_Vbo);
 

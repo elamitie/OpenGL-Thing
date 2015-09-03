@@ -26,9 +26,9 @@ namespace lame {
 			FatalError("Decode PNG failed with error: " + std::to_string(error));
 		}
 
-		glGenTextures(1, &(texture.id));
+		glGenTextures(1, &(texture.m_Texture));
 
-		glBindTexture(GL_TEXTURE_2D, texture.id);
+		glBindTexture(GL_TEXTURE_2D, texture.m_Texture);
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, &(out[0]));
 
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -40,8 +40,8 @@ namespace lame {
 
 		glBindTexture(GL_TEXTURE_2D, 0);
 
-		texture.width = width;
-		texture.height = height;
+		texture.m_Width = width;
+		texture.m_Height = height;
 
 		return texture;
 	}

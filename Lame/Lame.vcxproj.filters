@@ -117,4 +117,9 @@
       <Filter>Header Files\ThirdParty</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Texture.cpp">
+      <Filter>Source Files</Filter>
+    </None>
+  </ItemGroup>
 </Project>
