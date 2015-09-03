@@ -12,15 +12,15 @@ namespace lame {
 		m_Width = display->GetWidth();
 		m_Height = display->GetHeight();
 		
-		m_Camera.Init(m_Width, m_Height);
+		//m_Camera.Init(m_Width, m_Height);
 
-		m_ColorShader.Compile("Shaders/basic_color.vert", "Shaders/basic_color.frag");
-		m_ColorShader.AddAttribute("vertexPos");
-		m_ColorShader.AddAttribute("vertexColor");
-		m_ColorShader.AddAttribute("vertexUV");
-		m_ColorShader.Link();
+		//m_ColorShader.Compile("Shaders/basic_color.vert", "Shaders/basic_color.frag");
+		//m_ColorShader.AddAttribute("vertexPos");
+		//m_ColorShader.AddAttribute("vertexColor");
+		//m_ColorShader.AddAttribute("vertexUV");
+		//m_ColorShader.Link();
 
-		m_Batch.Init();
+		//m_Batch.Init();
 	}
 
 	Engine::~Engine()
@@ -58,8 +58,9 @@ namespace lame {
 			{
 				shouldRender = true;
 
+				m_Display->Update();
 				update();
-				m_Camera.Update();
+				//m_Camera.Update();
 
 				unprocessedTime -= m_Frametime;
 			}
@@ -67,7 +68,9 @@ namespace lame {
 			if (shouldRender)
 			{
 				frames++;
+				m_Display->Clear();
 				render();
+				m_Display->SwapBuffers();
 			}
 		}
 	}
@@ -79,41 +82,37 @@ namespace lame {
 
 	void Engine::update()
 	{
-		m_Display->Update();
-
-		if (Keyboard::Pressed(W))
+		/*if (Keyboard::Pressed(W))
 			m_Camera.SetPosition(m_Camera.GetPosition() + glm::vec2( 0.0,  5.0));
-		else if (Keyboard::Pressed(S))
+			else if (Keyboard::Pressed(S))
 			m_Camera.SetPosition(m_Camera.GetPosition() + glm::vec2( 0.0, -5.0));
-		else if (Keyboard::Pressed(A))
+			else if (Keyboard::Pressed(A))
 			m_Camera.SetPosition(m_Camera.GetPosition() + glm::vec2(-5.0,  0.0));
-		else if (Keyboard::Pressed(D))
-			m_Camera.SetPosition(m_Camera.GetPosition() + glm::vec2( 5.0,  0.0));
+			else if (Keyboard::Pressed(D))
+			m_Camera.SetPosition(m_Camera.GetPosition() + glm::vec2( 5.0,  0.0));*/
 	}
 
 	void Engine::render()
 	{
-		m_Display->Clear();
-		m_ColorShader.Enable();
-		glActiveTexture(GL_TEXTURE0);
+		//m_ColorShader.Enable();
+		//glActiveTexture(GL_TEXTURE0);
 
-		m_ColorShader.SetUniform("tex", 0);
-		m_ColorShader.SetUniform("projectionMatrix", m_Camera.GetCamMatrix());
+		//m_ColorShader.SetUniform("tex", 0);
+		//m_ColorShader.SetUniform("projectionMatrix", m_Camera.GetCamMatrix());
 
-		static Texture tex = ResourceManager::GetTexture("Textures/jimmyjump/PNG/CharacterRight_Standing.png");
+		//static Texture tex = ResourceManager::GetTexture("Textures/jimmyjump/PNG/CharacterRight_Standing.png");
 
-		m_Batch.Begin();
-		m_Batch.Draw(glm::vec4(0, 0, 50, 50), 
-					glm::vec4(0.0f, 0.0f, 1.0f, 1.0f),
-					tex.id,
-					0.0f,
-					{ 255, 255, 255, 255 } /* Color Initialization C++11 */);
-		m_Batch.End();
-		m_Batch.RenderBatches();
+		//m_Batch.Begin();
+		//m_Batch.Draw(glm::vec4(0, 0, 50, 50), 
+		//			glm::vec4(0.0f, 0.0f, 1.0f, 1.0f),
+		//			tex.id,
+		//			0.0f,
+		//			{ 255, 255, 255, 255 } /* Color Initialization C++11 */);
+		//m_Batch.End();
+		//m_Batch.RenderBatches();
 
-		glBindTexture(GL_TEXTURE_2D, 0);
-		m_ColorShader.Disable();
-		m_Display->SwapBuffers();
+		//glBindTexture(GL_TEXTURE_2D, 0);
+		//m_ColorShader.Disable();
 	}
 
 }

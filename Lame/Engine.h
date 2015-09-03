@@ -15,21 +15,24 @@ namespace lame {
 	{
 	public:
 		Engine(Display* display, double framerate);
-		~Engine();
+		virtual ~Engine();
 
 		void Run();
 
-	private:
+	protected:
 		virtual void update();
 		virtual void render();
 		void dispose();
 
+	protected:
 		Display*    m_Display;
 		double      m_Frametime;
 		int         m_Width;
 		int         m_Height;
-		Shader      m_ColorShader;
-		Camera2D    m_Camera;
-		SpriteBatch	m_Batch;
+
+	//private:
+	//	Shader      m_ColorShader;
+	//	Camera2D    m_Camera;
+	//	SpriteBatch	m_Batch;
 	};
 }

@@ -1,11 +1,9 @@
-#include <iostream>
-#include <Lame/Engine.h>
-#include <Lame/Display.h>
+#include "Application.h"
 
 int main(int argc, char** argv)
 {
-	lame::Engine engine(new lame::Display(800, 600, "Lame"), 60.0);
-	engine.Run();
+	Application app(new Display(800, 600, "Lame"), 60.0);
+	app.Run();
 
 	return 0;
 }
