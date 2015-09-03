@@ -1,13 +1,13 @@
 #include "ImageLoader.h"
 #include "picoPNG.h"
-#include "IOManager.h"
+#include "File.h"
 #include "Error.h"
 
 #include <iostream>
 
 namespace lame {
 
-	Texture ImageLoader::loadPNG(std::string filepath)
+	Texture ImageLoader::LoadPNG(std::string filepath)
 	{
 		Texture texture = {};
 
@@ -15,15 +15,15 @@ namespace lame {
 		std::vector<unsigned char> out;
 		unsigned long width, height;
 
-		if (IOManager::readFileToBuffer(filepath, in) == false)
+		if (File::ReadFileToBuffer(filepath, in) == false)
 		{
-			fatalError("Failed to load PNG file to buffer!");
+			FatalError("Failed to load PNG file to buffer!");
 		}
 
 		int error = decodePNG(out, width, height, &(in[0]), in.size());
 		if (error != 0)
 		{
-			fatalError("Decode PNG failed with error: " + std::to_string(error));
+			FatalError("Decode PNG failed with error: " + std::to_string(error));
 		}
 
 		glGenTextures(1, &(texture.id));

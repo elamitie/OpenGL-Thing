@@ -1,9 +1,9 @@
-#include "IOManager.h"
+#include "File.h"
 #include <fstream>
 
 namespace lame {
 
-	bool IOManager::readFileToBuffer(std::string filepath, std::vector<unsigned char>& buffer)
+	bool File::ReadFileToBuffer(std::string filepath, std::vector<unsigned char>& buffer)
 	{
 		std::ifstream file(filepath, std::ios::binary);
 		if (file.fail())
@@ -29,7 +29,7 @@ namespace lame {
 		return true;
 	}
 
-	bool IOManager::readFileToBuffer(std::string filepath, std::string& buffer)
+	bool File::ReadFileToBuffer(std::string filepath, std::string& buffer)
 	{
 		std::ifstream file(filepath, std::ios::binary);
 		if (file.fail())

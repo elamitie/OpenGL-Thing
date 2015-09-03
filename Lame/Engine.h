@@ -1,7 +1,7 @@
 #pragma once
 
 #include <SDL/SDL.h>
-#include "IDisplay.h"
+#include "Display.h"
 #include "Sprite.h"
 #include "Shader.h"
 #include "Texture.h"
@@ -14,22 +14,22 @@ namespace lame {
 	class Engine
 	{
 	public:
-		Engine(IDisplay* display, double framerate);
+		Engine(Display* display, double framerate);
 		~Engine();
 
-		void run();
-		void dispose();
+		void Run();
 
 	private:
-		void update();
-		void draw();
+		virtual void update();
+		virtual void render();
+		void dispose();
 
-		IDisplay*   mDisplay;
-		double      mFrametime;
-		int         mWidth;
-		int         mHeight;
-		Shader      mColorShader;
-		Camera2D    mCamera;
-		SpriteBatch	mBatch;
+		Display*    m_Display;
+		double      m_Frametime;
+		int         m_Width;
+		int         m_Height;
+		Shader      m_ColorShader;
+		Camera2D    m_Camera;
+		SpriteBatch	m_Batch;
 	};
 }

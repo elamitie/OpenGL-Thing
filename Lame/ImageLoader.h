@@ -8,7 +8,7 @@ namespace lame {
 	class ImageLoader
 	{
 	public:
-		static Texture loadPNG(std::string filepath);
+		static Texture LoadPNG(std::string filepath);
 	};
 
 }

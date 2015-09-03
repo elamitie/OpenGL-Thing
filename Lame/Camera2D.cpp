@@ -2,7 +2,7 @@
 
 namespace lame {
 
-	Camera2D::Camera2D() : mPosition(0, 0), mCamMatrix(1.0f), mOrthoMatrix(1.0f), mScale(1.0f), mNeedsMatUpdate(true), mViewportWidth(500), mViewportHeight(500)
+	Camera2D::Camera2D() : m_Position(0, 0), m_CamMatrix(1.0f), m_OrthoMatrix(1.0f), m_Scale(1.0f), m_NeedsMatUpdate(true), m_ViewportWidth(500), m_ViewportHeight(500)
 	{
 	}
 
@@ -10,35 +10,35 @@ namespace lame {
 	{
 	}
 
-	void Camera2D::init(int width, int height)
+	void Camera2D::Init(int width, int height)
 	{
-		mViewportWidth = width;
-		mViewportHeight = height;
-		mOrthoMatrix = glm::ortho(0.0f, (float)mViewportWidth, 0.0f, (float)mViewportHeight);
+		m_ViewportWidth = width;
+		m_ViewportHeight = height;
+		m_OrthoMatrix = glm::ortho(0.0f, (float)m_ViewportWidth, 0.0f, (float)m_ViewportHeight);
 	}
 
-	void Camera2D::update()
+	void Camera2D::Update()
 	{
-		if (mNeedsMatUpdate)
+		if (m_NeedsMatUpdate)
 		{
-			glm::vec3 translate(-mPosition.x + mViewportWidth / 2, -mPosition.y + mViewportHeight / 2, 0.0f);
-			mCamMatrix = glm::translate(mOrthoMatrix, translate);
+			glm::vec3 translate(-m_Position.x + m_ViewportWidth / 2, -m_Position.y + m_ViewportHeight / 2, 0.0f);
+			m_CamMatrix = glm::translate(m_OrthoMatrix, translate);
 
-			glm::vec3 scale(mScale, mScale, 0.0f);
-			mCamMatrix = glm::scale(glm::mat4(1.0f), scale) * mCamMatrix;
+			glm::vec3 scale(m_Scale, m_Scale, 0.0f);
+			m_CamMatrix = glm::scale(glm::mat4(1.0f), scale) * m_CamMatrix;
 
-			mNeedsMatUpdate = false;
+			m_NeedsMatUpdate = false;
 		}
 	}
 
-	glm::vec2 Camera2D::screenToWorld(glm::vec2 screenCoords)
+	glm::vec2 Camera2D::ScreenToWorld(glm::vec2 screenCoords)
 	{
 		// Invert Y
-		screenCoords.y = mViewportHeight - screenCoords.y;
+		screenCoords.y = m_ViewportHeight - screenCoords.y;
 
-		screenCoords -= glm::vec2(mViewportWidth / 2, mViewportHeight / 2);
-		screenCoords /= mScale;
-		screenCoords += mPosition;
+		screenCoords -= glm::vec2(m_ViewportWidth / 2, m_ViewportHeight / 2);
+		screenCoords /= m_Scale;
+		screenCoords += m_Position;
 		return screenCoords;
 	}
 }

@@ -3,5 +3,5 @@
 #include <string>
 
 namespace lame {
-	extern void fatalError(std::string errorString);
+	extern void FatalError(std::string errorString);
 }

@@ -5,22 +5,22 @@
 
 namespace lame {
 
-	Engine::Engine(IDisplay* display, double framerate)
-		: mDisplay(display)
+	Engine::Engine(Display* display, double framerate)
+		: m_Display(display)
 	{
-		mFrametime = 1.0 / framerate;
-		mWidth = display->getWidth();
-		mHeight = display->getHeight();
+		m_Frametime = 1.0 / framerate;
+		m_Width = display->GetWidth();
+		m_Height = display->GetHeight();
 		
-		mCamera.init(mWidth, mHeight);
+		m_Camera.Init(m_Width, m_Height);
 
-		mColorShader.compile("Shaders/basic_color.vert", "Shaders/basic_color.frag");
-		mColorShader.addAttribute("vertexPos");
-		mColorShader.addAttribute("vertexColor");
-		mColorShader.addAttribute("vertexUV");
-		mColorShader.link();
+		m_ColorShader.Compile("Shaders/basic_color.vert", "Shaders/basic_color.frag");
+		m_ColorShader.AddAttribute("vertexPos");
+		m_ColorShader.AddAttribute("vertexColor");
+		m_ColorShader.AddAttribute("vertexUV");
+		m_ColorShader.Link();
 
-		mBatch.init();
+		m_Batch.Init();
 	}
 
 	Engine::~Engine()
@@ -28,7 +28,7 @@ namespace lame {
 		dispose();
 	}
 
-	void Engine::run()
+	void Engine::Run()
 	{
 		int frames = 0;
 		double unprocessedTime = 0.0;
@@ -36,9 +36,9 @@ namespace lame {
 
 		Uint32 previousTime = SDL_GetTicks();
 
-		while (!mDisplay->isClosed())
+		while (!m_Display->IsClosed())
 		{
-			bool render = false;
+			bool shouldRender = false;
 
 			Uint32 currentTime = SDL_GetTicks();
 			Uint32 passedTime = currentTime - previousTime;
@@ -54,66 +54,66 @@ namespace lame {
 				frameCounterTime = 0.0;
 			}
 
-			while (unprocessedTime > mFrametime)
+			while (unprocessedTime > m_Frametime)
 			{
-				render = true;
+				shouldRender = true;
 
 				update();
-				mCamera.update();
+				m_Camera.Update();
 
-				unprocessedTime -= mFrametime;
+				unprocessedTime -= m_Frametime;
 			}
 
-			if (render)
+			if (shouldRender)
 			{
 				frames++;
-				draw();
+				render();
 			}
 		}
 	}
 
 	void Engine::dispose()
 	{
-		mDisplay->dispose();
+		m_Display->Dispose();
 	}
 
 	void Engine::update()
 	{
-		mDisplay->update();
+		m_Display->Update();
 
-		if (Keyboard::pressed(W))
-			mCamera.setPosition(mCamera.getPosition() + glm::vec2( 0.0,  5.0));
-		else if (Keyboard::pressed(S))
-			mCamera.setPosition(mCamera.getPosition() + glm::vec2( 0.0, -5.0));
-		else if (Keyboard::pressed(A))
-			mCamera.setPosition(mCamera.getPosition() + glm::vec2(-5.0,  0.0));
-		else if (Keyboard::pressed(D))
-			mCamera.setPosition(mCamera.getPosition() + glm::vec2( 5.0,  0.0));
+		if (Keyboard::Pressed(W))
+			m_Camera.SetPosition(m_Camera.GetPosition() + glm::vec2( 0.0,  5.0));
+		else if (Keyboard::Pressed(S))
+			m_Camera.SetPosition(m_Camera.GetPosition() + glm::vec2( 0.0, -5.0));
+		else if (Keyboard::Pressed(A))
+			m_Camera.SetPosition(m_Camera.GetPosition() + glm::vec2(-5.0,  0.0));
+		else if (Keyboard::Pressed(D))
+			m_Camera.SetPosition(m_Camera.GetPosition() + glm::vec2( 5.0,  0.0));
 	}
 
-	void Engine::draw()
+	void Engine::render()
 	{
-		mDisplay->clear();
-		mColorShader.enable();
+		m_Display->Clear();
+		m_ColorShader.Enable();
 		glActiveTexture(GL_TEXTURE0);
 
-		mColorShader.setUniform("tex", 0);
-		mColorShader.setUniform("projectionMatrix", mCamera.getCamMatrix());
+		m_ColorShader.SetUniform("tex", 0);
+		m_ColorShader.SetUniform("projectionMatrix", m_Camera.GetCamMatrix());
 
-		static Texture tex = ResourceManager::getTexture("Textures/jimmyjump/PNG/CharacterRight_Standing.png");
+		static Texture tex = ResourceManager::GetTexture("Textures/jimmyjump/PNG/CharacterRight_Standing.png");
 
-		mBatch.begin();
-		mBatch.draw(glm::vec4(0, 0, 50, 50), 
+		m_Batch.Begin();
+		m_Batch.Draw(glm::vec4(0, 0, 50, 50), 
 					glm::vec4(0.0f, 0.0f, 1.0f, 1.0f),
 					tex.id,
 					0.0f,
 					{ 255, 255, 255, 255 } /* Color Initialization C++11 */);
-		mBatch.end();
-		mBatch.renderBatch();
+		m_Batch.End();
+		m_Batch.RenderBatches();
 
 		glBindTexture(GL_TEXTURE_2D, 0);
-		mColorShader.disable();
-		mDisplay->swapBuffers();
+		m_ColorShader.Disable();
+		m_Display->SwapBuffers();
 	}
 
 }

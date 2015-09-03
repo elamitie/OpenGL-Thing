@@ -12,16 +12,16 @@ namespace lame {
 		Sprite();
 		~Sprite();
 
-		void init(float x, float y, float width, float height, const std::string& texturePath);
-		void draw();
+		void Init(float x, float y, float width, float height, const std::string& texturePath);
+		void Draw();
 
 	private:
-		float mX;
-		float mY;
-		float mWidth;
-		float mHeight;
-		GLuint mVbo;
-		Texture mTexture;
+		float m_X;
+		float m_Y;
+		float m_Width;
+		float m_Height;
+		GLuint m_Vbo;
+		Texture m_Texture;
 	};
 
 }

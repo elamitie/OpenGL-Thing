@@ -7,10 +7,10 @@ namespace lame {
 	class ResourceManager
 	{
 	public:
-		static Texture getTexture(const std::string& filepath);
+		static Texture GetTexture(const std::string& filepath);
 
 	private:
-		static TextureCache mTextureCache;
+		static TextureCache m_TextureCache;
 	};
 
 }

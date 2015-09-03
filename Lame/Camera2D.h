@@ -11,29 +11,29 @@ namespace lame {
 		Camera2D();
 		~Camera2D();
 
-		void init(int width, int height);
-		void update();
+		void Init(int width, int height);
+		void Update();
 
-		glm::vec2 screenToWorld(glm::vec2 screenCoords);
+		glm::vec2 ScreenToWorld(glm::vec2 screenCoords);
 
 		// getters
-		inline glm::vec2 getPosition() { return mPosition; }
-		inline glm::mat4 getCamMatrix() { return mCamMatrix; }
-		inline float getScale() { return mScale; }
+		inline glm::vec2 GetPosition() { return m_Position; }
+		inline glm::mat4 GetCamMatrix() { return m_CamMatrix; }
+		inline float GetScale() { return m_Scale; }
 
 		// setters
-		inline void setPosition(const glm::vec2& position) { mPosition = position; mNeedsMatUpdate = true; };
-		inline void setScale(float scale) { mScale = scale; mNeedsMatUpdate = true; }
+		inline void SetPosition(const glm::vec2& position) { m_Position = position; m_NeedsMatUpdate = true; };
+		inline void SetScale(float scale) { m_Scale = scale; m_NeedsMatUpdate = true; }
 
 
 	private:
-		int       mViewportWidth;
-		int		  mViewportHeight;
-		bool      mNeedsMatUpdate;
-		float     mScale;
-		glm::vec2 mPosition;
-		glm::mat4 mCamMatrix;
-		glm::mat4 mOrthoMatrix;
+		int       m_ViewportWidth;
+		int		  m_ViewportHeight;
+		bool      m_NeedsMatUpdate;
+		float     m_Scale;
+		glm::vec2 m_Position;
+		glm::mat4 m_CamMatrix;
+		glm::mat4 m_OrthoMatrix;
 	};
 
 }

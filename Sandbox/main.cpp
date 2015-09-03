@@ -1,11 +1,11 @@
 #include <iostream>
 #include <Lame/Engine.h>
-#include <Lame/OpenGLDisplay.h>
+#include <Lame/Display.h>
 
 int main(int argc, char** argv)
 {
-	lame::Engine engine(new lame::OpenGLDisplay(800, 600, "OpenGL"), 60.0);
-	engine.run();
+	lame::Engine engine(new lame::Display(800, 600, "Lame"), 60.0);
+	engine.Run();
 
 	return 0;
 }

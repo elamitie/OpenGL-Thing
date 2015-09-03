@@ -27,13 +27,13 @@ namespace lame {
 		Keyboard();
 		~Keyboard();
 
-		void handleKeyDown(const SDL_Event& ev);
-		void handleKeyUp(const SDL_Event& ev);
+		void HandleKeyDown(const SDL_Event& ev);
+		void HandleKeyUp(const SDL_Event& ev);
 
 		//std::vector<Key> getPressedKeys();
 
-		static bool pressed(Key key);
-		static bool clicked(Key key);
+		static bool Pressed(Key key);
+		static bool Clicked(Key key);
 
 	private:
 		static bool             mKeys[65536];

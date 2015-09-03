@@ -6,7 +6,7 @@
 namespace lame {
 
 	Shader::Shader()
-		: mProgram(0), mVert(0), mFrag(0), mNumAttributes(0)
+		: m_Program(0), m_Vert(0), m_Frag(0), m_NumAttributes(0)
 	{
 	}
 
@@ -14,61 +14,61 @@ namespace lame {
 	{
 	}
 
-	void Shader::compile(const std::string& vertPath, const std::string& fragPath)
+	void Shader::Compile(const std::string& vertPath, const std::string& fragPath)
 	{
-		mProgram = glCreateProgram();
+		m_Program = glCreateProgram();
 
-		mVert = glCreateShader(GL_VERTEX_SHADER);
-		if (mVert == 0)
+		m_Vert = glCreateShader(GL_VERTEX_SHADER);
+		if (m_Vert == 0)
 			std::cout << "Vertex shader failed to be created" << std::endl;
 
-		mFrag = glCreateShader(GL_FRAGMENT_SHADER);
-		if (mFrag == 0)
+		m_Frag = glCreateShader(GL_FRAGMENT_SHADER);
+		if (m_Frag == 0)
 			std::cout << "Fragment shader failed to be created" << std::endl;
 
-		compileShader(vertPath, mVert);
-		compileShader(fragPath, mFrag);
+		compileShader(vertPath, m_Vert);
+		compileShader(fragPath, m_Frag);
 	}
 
-	void Shader::link()
+	void Shader::Link()
 	{
-		glAttachShader(mProgram, mVert);
-		glAttachShader(mProgram, mFrag);
+		glAttachShader(m_Program, m_Vert);
+		glAttachShader(m_Program, m_Frag);
 
-		glLinkProgram(mProgram);
+		glLinkProgram(m_Program);
 
 		GLint isLinked = 0;
-		glGetProgramiv(mProgram, GL_LINK_STATUS, (int*)&isLinked);
+		glGetProgramiv(m_Program, GL_LINK_STATUS, (int*)&isLinked);
 		if (isLinked == GL_FALSE)
 		{
 			GLint maxLength = 0;
-			glGetProgramiv(mProgram, GL_INFO_LOG_LENGTH, &maxLength);
+			glGetProgramiv(m_Program, GL_INFO_LOG_LENGTH, &maxLength);
 
 			std::vector<char> errorLog(maxLength);
-			glGetProgramInfoLog(mProgram, maxLength, &maxLength, &errorLog[0]);
+			glGetProgramInfoLog(m_Program, maxLength, &maxLength, &errorLog[0]);
 
-			glDeleteProgram(mProgram);
-			glDeleteShader(mVert);
-			glDeleteShader(mFrag);
+			glDeleteProgram(m_Program);
+			glDeleteShader(m_Vert);
+			glDeleteShader(m_Frag);
 
 			std::printf("%s\n", &errorLog[0]);
 			return;
 		}
 
-		glDetachShader(mProgram, mVert);
-		glDetachShader(mProgram, mFrag);
-		glDeleteShader(mVert);
-		glDeleteShader(mFrag);
+		glDetachShader(m_Program, m_Vert);
+		glDetachShader(m_Program, m_Frag);
+		glDeleteShader(m_Vert);
+		glDeleteShader(m_Frag);
 	}
 
-	void Shader::addAttribute(const std::string& attrib)
+	void Shader::AddAttribute(const std::string& attrib)
 	{
-		glBindAttribLocation(mProgram, mNumAttributes++, attrib.c_str());
+		glBindAttribLocation(m_Program, m_NumAttributes++, attrib.c_str());
 	}
 
-	GLint Shader::getUniformLocation(const std::string& uniformName)
+	GLint Shader::GetUniformLocation(const std::string& uniformName)
 	{
-		GLint location = glGetUniformLocation(mProgram, uniformName.c_str());
+		GLint location = glGetUniformLocation(m_Program, uniformName.c_str());
 		if (location == GL_INVALID_INDEX)
 			std::cout << "could not find uniform name" << std::endl;
 		return location;
@@ -107,65 +107,65 @@ namespace lame {
 		}
 	}
 
-	void Shader::enable()
+	void Shader::Enable()
 	{
-		glUseProgram(mProgram);
-		for (int i = 0; i < mNumAttributes; i++)
+		glUseProgram(m_Program);
+		for (int i = 0; i < m_NumAttributes; i++)
 			glEnableVertexAttribArray(i);
 	}
 
-	void Shader::disable()
+	void Shader::Disable()
 	{
 		glUseProgram(0);
-		for (int i = 0; i < mNumAttributes; i++)
+		for (int i = 0; i < m_NumAttributes; i++)
 			glDisableVertexAttribArray(i);
 	}
 
-	void Shader::setUniform(const std::string& name, GLint data)
+	void Shader::SetUniform(const std::string& name, GLint data)
 	{
-		GLint location = this->getUniformLocation(name);
+		GLint location = this->GetUniformLocation(name);
 		glUniform1i(location, data);
 	}
 
-	void Shader::setUniform(const std::string& name, GLint* data, GLsizei count)
+	void Shader::SetUniform(const std::string& name, GLint* data, GLsizei count)
 	{
-		GLint location = this->getUniformLocation(name);
+		GLint location = this->GetUniformLocation(name);
 		glUniform1iv(location, count, data);
 	}
 
-	void Shader::setUniform(const std::string& name, GLfloat data)
+	void Shader::SetUniform(const std::string& name, GLfloat data)
 	{
-		GLint location = this->getUniformLocation(name);
+		GLint location = this->GetUniformLocation(name);
 		glUniform1f(location, data);
 	}
 
-	void Shader::setUniform(const std::string& name, GLfloat* data, GLsizei count)
+	void Shader::SetUniform(const std::string& name, GLfloat* data, GLsizei count)
 	{
-		GLint location = this->getUniformLocation(name);
+		GLint location = this->GetUniformLocation(name);
 		glUniform1fv(location, count, data);
 	}
 
-	void Shader::setUniform(const std::string& name, const glm::vec2& vector)
+	void Shader::SetUniform(const std::string& name, const glm::vec2& vector)
 	{
-		GLint location = this->getUniformLocation(name);
+		GLint location = this->GetUniformLocation(name);
 		glUniform2f(location, vector.x, vector.y);
 	}
 
-	void Shader::setUniform(const std::string& name, const glm::vec3& vector)
+	void Shader::SetUniform(const std::string& name, const glm::vec3& vector)
 	{
-		GLint location = this->getUniformLocation(name);
+		GLint location = this->GetUniformLocation(name);
 		glUniform3f(location, vector.x, vector.y, vector.z);
 	}
 
-	void Shader::setUniform(const std::string& name, const glm::vec4& vector)
+	void Shader::SetUniform(const std::string& name, const glm::vec4& vector)
 	{
-		GLint location = this->getUniformLocation(name);
+		GLint location = this->GetUniformLocation(name);
 		glUniform4f(location, vector.x, vector.y, vector.z, vector.w);
 	}
 
-	void Shader::setUniform(const std::string& name, const glm::mat4& matrix)
+	void Shader::SetUniform(const std::string& name, const glm::mat4& matrix)
 	{
-		GLint location = this->getUniformLocation(name);
+		GLint location = this->GetUniformLocation(name);
 		glUniformMatrix4fv(location, 1, GL_FALSE, &(matrix[0][0]));
 	}
 

@@ -16,7 +16,7 @@ namespace lame {
 	{
 	}
 
-	bool Mouse::clicked(unsigned int button)
+	bool Mouse::Clicked(unsigned int button)
 	{
 		bool clicked = mButton == button;
 		if (!clicked) return false;
@@ -26,34 +26,34 @@ namespace lame {
 		return true;
 	}
 
-	int Mouse::getDX()
+	int Mouse::GetDX()
 	{
 		// Temp
 		return 800 / 2 - mX;
 	}
 
-	int Mouse::getDY()
+	int Mouse::GetDY()
 	{
 		// Temp
 		return 600 / 2 - mY;
 	}
 
-	int Mouse::getMouseButton()
+	int Mouse::GetMouseButton()
 	{
 		return mButton;
 	}
 
-	bool Mouse::mouseGrabbed()
+	bool Mouse::MouseGrabbed()
 	{
 		return mGrabbed;
 	}
 
-	void Mouse::handleMouseDown(const SDL_Event& ev)
+	void Mouse::HandleMouseDown(const SDL_Event& ev)
 	{
 		mButton = ev.button.button;
 	}
 
-	void Mouse::handleMouseUp(const SDL_Event& ev)
+	void Mouse::HandleMouseUp(const SDL_Event& ev)
 	{
 		mButton = 0;
 		if (!mClickedButtons.empty() && std::find(mClickedButtons.begin(), mClickedButtons.end(), ev.button.button) != mClickedButtons.end())

@@ -15,12 +15,12 @@ namespace lame {
 	{
 	}
 
-	void Keyboard::handleKeyDown(const SDL_Event& ev)
+	void Keyboard::HandleKeyDown(const SDL_Event& ev)
 	{
 		mKeys[ev.key.keysym.scancode] = true;
 	}
 
-	void Keyboard::handleKeyUp(const SDL_Event& ev)
+	void Keyboard::HandleKeyUp(const SDL_Event& ev)
 	{
 		mKeys[ev.key.keysym.scancode] = false;
 
@@ -28,14 +28,14 @@ namespace lame {
 			mPressedKeys.erase(std::find(mPressedKeys.begin(), mPressedKeys.end(), ev.key.keysym.scancode));
 	}
 
-	bool Keyboard::pressed(Key key)
+	bool Keyboard::Pressed(Key key)
 	{
 		return mKeys[key];
 	}
 
-	bool Keyboard::clicked(Key key)
+	bool Keyboard::Clicked(Key key)
 	{
-		bool p = pressed(key);
+		bool p = Pressed(key);
 		if (!p) return false;
 		if (!mPressedKeys.empty() && std::find(mPressedKeys.begin(), mPressedKeys.end(), key) != mPressedKeys.end())
 			return false;
