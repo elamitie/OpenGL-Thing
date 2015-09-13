@@ -2,12 +2,12 @@
 
 namespace lame {
 
-	void Texture::Bind()
+	void Texture::bind()
 	{
-		glBindTexture(GL_TEXTURE_2D, m_Texture);
+		glBindTexture(GL_TEXTURE_2D, m_texture);
 	}
 
-	void Texture::Unbind()
+	void Texture::unbind()
 	{
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}

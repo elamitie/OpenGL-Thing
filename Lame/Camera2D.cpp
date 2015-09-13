@@ -2,7 +2,7 @@
 
 namespace lame {
 
-	Camera2D::Camera2D() : m_Position(0, 0), m_CamMatrix(1.0f), m_OrthoMatrix(1.0f), m_Scale(1.0f), m_NeedsMatUpdate(true), m_ViewportWidth(500), m_ViewportHeight(500)
+	Camera2D::Camera2D() : m_position(0, 0), m_camMatrix(1.0f), m_orthoMatrix(1.0f), m_scale(1.0f), m_needsMatUpdate(true), m_viewportWidth(500), m_viewportHeight(500)
 	{
 	}
 
@@ -10,35 +10,35 @@ namespace lame {
 	{
 	}
 
-	void Camera2D::Init(int width, int height)
+	void Camera2D::init(int width, int height)
 	{
-		m_ViewportWidth = width;
-		m_ViewportHeight = height;
-		m_OrthoMatrix = glm::ortho(0.0f, (float)m_ViewportWidth, 0.0f, (float)m_ViewportHeight);
+		m_viewportWidth = width;
+		m_viewportHeight = height;
+		m_orthoMatrix = glm::ortho(0.0f, (float)m_viewportWidth, 0.0f, (float)m_viewportHeight);
 	}
 
-	void Camera2D::Update()
+	void Camera2D::update()
 	{
-		if (m_NeedsMatUpdate)
+		if (m_needsMatUpdate)
 		{
-			glm::vec3 translate(-m_Position.x + m_ViewportWidth / 2, -m_Position.y + m_ViewportHeight / 2, 0.0f);
-			m_CamMatrix = glm::translate(m_OrthoMatrix, translate);
+			glm::vec3 translate(-m_position.x + m_viewportWidth / 2, -m_position.y + m_viewportHeight / 2, 0.0f);
+			m_camMatrix = glm::translate(m_orthoMatrix, translate);
 
-			glm::vec3 scale(m_Scale, m_Scale, 0.0f);
-			m_CamMatrix = glm::scale(glm::mat4(1.0f), scale) * m_CamMatrix;
+			glm::vec3 scale(m_scale, m_scale, 0.0f);
+			m_camMatrix = glm::scale(glm::mat4(1.0f), scale) * m_camMatrix;
 
-			m_NeedsMatUpdate = false;
+			m_needsMatUpdate = false;
 		}
 	}
 
-	glm::vec2 Camera2D::ScreenToWorld(glm::vec2 screenCoords)
+	glm::vec2 Camera2D::screenToWorld(glm::vec2 screenCoords)
 	{
 		// Invert Y
-		screenCoords.y = m_ViewportHeight - screenCoords.y;
+		screenCoords.y = m_viewportHeight - screenCoords.y;
 
-		screenCoords -= glm::vec2(m_ViewportWidth / 2, m_ViewportHeight / 2);
-		screenCoords /= m_Scale;
-		screenCoords += m_Position;
+		screenCoords -= glm::vec2(m_viewportWidth / 2, m_viewportHeight / 2);
+		screenCoords /= m_scale;
+		screenCoords += m_position;
 		return screenCoords;
 	}
 }

@@ -7,10 +7,10 @@ namespace lame {
 	{
 		Uint32 _flags = SDL_WINDOW_OPENGL;
 
-		m_Closed = false;
-		m_Width = width;
-		m_Height = height;
-		m_Title = title;
+		m_closed = false;
+		m_width = width;
+		m_height = height;
+		m_title = title;
 
 		if (flags & INVISIBLE)
 			_flags |= SDL_WINDOW_HIDDEN;
@@ -21,17 +21,17 @@ namespace lame {
 
 		SDL_Init(SDL_INIT_EVERYTHING);
 
-		m_Window = SDL_CreateWindow(m_Title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, m_Width, m_Height, _flags);
-		if (m_Window == nullptr)
-			FatalError("Could not create SDL Window!");
+		m_window = SDL_CreateWindow(m_title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, m_width, m_height, _flags);
+		if (m_window == nullptr)
+			fatalError("Could not create SDL Window!");
 
-		m_Context = SDL_GL_CreateContext(m_Window);
-		if (m_Context == nullptr)
-			FatalError("Could not create SDL GL Context!");
+		m_context = SDL_GL_CreateContext(m_window);
+		if (m_context == nullptr)
+			fatalError("Could not create SDL GL Context!");
 
 		GLenum error = glewInit();
 		if (error != GLEW_OK)
-			FatalError("Failed to initialize GLEW!");
+			fatalError("Failed to initialize GLEW!");
 
 		std::printf("***   OpenGL Version: %s   ***\n", glGetString(GL_VERSION));
 
@@ -46,10 +46,10 @@ namespace lame {
 
 	Display::~Display()
 	{
-		Dispose();
+		dispose();
 	}
 
-	void Display::Update()
+	void Display::update()
 	{
 		SDL_Event e;
 
@@ -58,37 +58,37 @@ namespace lame {
 			switch (e.type)
 			{
 			case SDL_QUIT:
-				m_Closed = true;
+				m_closed = true;
 				break;
 			case SDL_KEYDOWN:
-				m_Keyboard.HandleKeyDown(e);
+				m_keyboard.handleKeyDown(e);
 				break;
 			case SDL_KEYUP:
-				m_Keyboard.HandleKeyUp(e);
+				m_keyboard.handleKeyUp(e);
 				break;
 			case SDL_MOUSEBUTTONDOWN:
-				m_Mouse.HandleMouseDown(e);
+				m_mouse.handleMouseDown(e);
 				break;
 			case SDL_MOUSEBUTTONUP:
-				m_Mouse.HandleMouseUp(e);
+				m_mouse.handleMouseUp(e);
 				break;
 			}
 		}
 	}
 
-	void Display::SwapBuffers()
+	void Display::swapBuffers()
 	{
-		SDL_GL_SwapWindow(m_Window);
+		SDL_GL_SwapWindow(m_window);
 	}
 
-	void Display::Dispose()
+	void Display::dispose()
 	{
-		SDL_GL_DeleteContext(m_Context);
-		SDL_DestroyWindow(m_Window);
+		SDL_GL_DeleteContext(m_context);
+		SDL_DestroyWindow(m_window);
 		SDL_Quit();
 	}
 
-	void Display::Clear()
+	void Display::clear()
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	}

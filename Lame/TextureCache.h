@@ -11,10 +11,10 @@ namespace lame {
 		TextureCache();
 		~TextureCache();
 
-		Texture GetTexture(const std::string& filepath);
+		Texture getTexture(const std::string& filepath);
 
 	private:
-		std::map<std::string, Texture> m_TextureMap;
+		std::map<std::string, Texture> m_textureMap;
 	};
 
 }

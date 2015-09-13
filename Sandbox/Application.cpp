@@ -3,15 +3,15 @@
 Application::Application(Display* display, double framerate)
 	:Engine(display, framerate)
 {
-	camera.Init(m_Width, m_Height);
+	camera.init(m_width, m_height);
 
-	shader.Compile("Shaders/basic_color.vert", "Shaders/basic_color.frag");
-	shader.AddAttribute("vertexPos");
-	shader.AddAttribute("vertexColor");
-	shader.AddAttribute("vertexUV");
-	shader.Link();
+	shader.compile("Shaders/basic_color.vert", "Shaders/basic_color.frag");
+	shader.addAttribute("vertexPos");
+	shader.addAttribute("vertexColor");
+	shader.addAttribute("vertexUV");
+	shader.link();
 
-	batch.Init();
+	batch.init();
 }
 
 Application::~Application()
@@ -20,21 +20,21 @@ Application::~Application()
 
 void Application::update()
 {
-	camera.Update();
+	camera.update();
 }
 
 void Application::render()
 {
-	Texture texture = ResourceManager::GetTexture("Textures/jimmyjump/PNG/CharacterRight_Standing.png");
+	Texture texture = ResourceManager::getTexture("Textures/jimmyjump/PNG/CharacterRight_Standing.png");
 
-	shader.Enable();
-	shader.SetUniform("tex", 0);
-	shader.SetUniform("projectionMatrix", camera.GetCamMatrix());
+	shader.enable();
+	shader.setUniform("tex", 0);
+	shader.setUniform("projectionMatrix", camera.getCamMatrix());
 
-	batch.Begin();
-	batch.Draw({ 0, 0, 50, 50 }, texture, 0, Color::white());
-	batch.End();
-	batch.RenderBatches();
+	batch.begin();
+	batch.draw({ 0, 0, 50, 50 }, texture, 0, Color::white());
+	batch.end();
+	batch.renderBatches();
 
-	shader.Disable();
+	shader.disable();
 }

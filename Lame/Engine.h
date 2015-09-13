@@ -17,7 +17,7 @@ namespace lame {
 		Engine(Display* display, double framerate);
 		virtual ~Engine();
 
-		void Run();
+		void run();
 
 	protected:
 		virtual void update();
@@ -25,14 +25,9 @@ namespace lame {
 		void dispose();
 
 	protected:
-		Display*    m_Display;
-		double      m_Frametime;
-		int         m_Width;
-		int         m_Height;
-
-	//private:
-	//	Shader      m_ColorShader;
-	//	Camera2D    m_Camera;
-	//	SpriteBatch	m_Batch;
+		Display*    m_display;
+		double      m_frametime;
+		int         m_width;
+		int         m_height;
 	};
 }

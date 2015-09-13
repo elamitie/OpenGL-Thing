@@ -8,23 +8,23 @@ namespace lame {
 	{
 		friend class ImageLoader;
 	public:
-		Texture() : m_Width(0), m_Height(0), m_Texture(0) {}
+		Texture() : m_width(0), m_height(0), m_texture(0) {}
 		~Texture(){}
 
-		void Bind();
-		void Unbind();
+		void bind();
+		void unbind();
 
-		inline int    GetWidth()  { return m_Width;   }
-		inline int    GetHeight() { return m_Height;  }
-		inline GLuint GetID()     { return m_Texture; }
+		inline int    getWidth()  { return m_width;   }
+		inline int    getHeight() { return m_height;  }
+		inline GLuint getID()     { return m_texture; }
 
-		inline void SetWidth(int width)   { m_Width = width;   }
-		inline void SetHeight(int height) { m_Height = height; }
+		inline void setWidth(int width)   { m_width = width;   }
+		inline void setHeight(int height) { m_height = height; }
 
 	private:
-		int    m_Width;
-		int    m_Height;
-		GLuint m_Texture;
+		int    m_width;
+		int    m_height;
+		GLuint m_texture;
 	};
 
 }

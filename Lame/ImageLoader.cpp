@@ -7,7 +7,7 @@
 
 namespace lame {
 
-	Texture ImageLoader::LoadPNG(std::string filepath)
+	Texture ImageLoader::loadPNG(std::string filepath)
 	{
 		Texture texture = {};
 
@@ -15,20 +15,20 @@ namespace lame {
 		std::vector<unsigned char> out;
 		unsigned long width, height;
 
-		if (File::ReadFileToBuffer(filepath, in) == false)
+		if (File::readFileToBuffer(filepath, in) == false)
 		{
-			FatalError("Failed to load PNG file to buffer!");
+			fatalError("Failed to load PNG file to buffer!");
 		}
 
 		int error = decodePNG(out, width, height, &(in[0]), in.size());
 		if (error != 0)
 		{
-			FatalError("Decode PNG failed with error: " + std::to_string(error));
+			fatalError("Decode PNG failed with error: " + std::to_string(error));
 		}
 
-		glGenTextures(1, &(texture.m_Texture));
+		glGenTextures(1, &(texture.m_texture));
 
-		glBindTexture(GL_TEXTURE_2D, texture.m_Texture);
+		glBindTexture(GL_TEXTURE_2D, texture.m_texture);
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, &(out[0]));
 
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -40,8 +40,8 @@ namespace lame {
 
 		glBindTexture(GL_TEXTURE_2D, 0);
 
-		texture.m_Width = width;
-		texture.m_Height = height;
+		texture.m_width = width;
+		texture.m_height = height;
 
 		return texture;
 	}

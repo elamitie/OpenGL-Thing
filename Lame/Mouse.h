@@ -19,21 +19,21 @@ namespace lame {
 		Mouse();
 		~Mouse();
 
-		void HandleMouseDown(const SDL_Event& ev);
-		void HandleMouseUp(const SDL_Event& ev);
+		void handleMouseDown(const SDL_Event& ev);
+		void handleMouseUp(const SDL_Event& ev);
 
-		static bool Clicked(unsigned int button);
-		static int  GetDX();
-		static int  GetDY();
-		static int  GetMouseButton();
-		static bool MouseGrabbed();
+		static bool clicked(unsigned int button);
+		static int  getDX();
+		static int  getDY();
+		static int  getMouseButton();
+		static bool mouseGrabbed();
 
 	private:
-		static std::vector<unsigned int> mClickedButtons;
-		static int						 mX;
-		static int						 mY;
-		static int						 mButton;
-		static bool						 mGrabbed;
+		static std::vector<unsigned int> m_clickedButtons;
+		static int						 m_x;
+		static int						 m_y;
+		static int						 m_button;
+		static bool						 m_grabbed;
 	};
 
 }

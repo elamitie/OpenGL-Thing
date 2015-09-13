@@ -12,32 +12,32 @@ namespace lame {
 		Shader();
 		~Shader();
 
-		void Compile(const std::string& vertPath, const std::string& fragPath);
-		void Link();
-		void AddAttribute(const std::string& attrib);
+		void compile(const std::string& vertPath, const std::string& fragPath);
+		void link();
+		void addAttribute(const std::string& attrib);
 
-		GLint GetUniformLocation(const std::string& uniformName);
+		GLint getUniformLocation(const std::string& uniformName);
 
-		void Enable();
-		void Disable();
+		void enable();
+		void disable();
 
-		void SetUniform(const std::string& name, GLint data);
-		void SetUniform(const std::string& name, GLint* data, GLsizei count);
-		void SetUniform(const std::string& name, GLfloat data);
-		void SetUniform(const std::string& name, GLfloat* data, GLsizei count);
-		void SetUniform(const std::string& name, const glm::vec2& vector);
-		void SetUniform(const std::string& name, const glm::vec3& vector);
-		void SetUniform(const std::string& name, const glm::vec4& vector);
-		void SetUniform(const std::string& name, const glm::mat4& matrix);
+		void setUniform(const std::string& name, GLint data);
+		void setUniform(const std::string& name, GLint* data, GLsizei count);
+		void setUniform(const std::string& name, GLfloat data);
+		void setUniform(const std::string& name, GLfloat* data, GLsizei count);
+		void setUniform(const std::string& name, const glm::vec2& vector);
+		void setUniform(const std::string& name, const glm::vec3& vector);
+		void setUniform(const std::string& name, const glm::vec4& vector);
+		void setUniform(const std::string& name, const glm::mat4& matrix);
 
 	private:
 		void compileShader(const std::string& path, GLuint& id);
 
 	private:
-		GLuint m_Program;
-		GLuint m_Vert;
-		GLuint m_Frag;
-		int    m_NumAttributes;
+		GLuint m_program;
+		GLuint m_vert;
+		GLuint m_frag;
+		int    m_numAttributes;
 	};
 
 }

@@ -53,13 +53,13 @@ namespace lame {
 		SpriteBatch();
 		~SpriteBatch();
 
-		void Init();
+		void init();
 
-		void Begin(GlyphSortType sortType = GlyphSortType::TEXTURE);
-		void End();
+		void begin(GlyphSortType sortType = GlyphSortType::TEXTURE);
+		void end();
 
-		void Draw(const glm::vec4& destRect, Texture texture, float depth, const Color& color);
-		void RenderBatches();
+		void draw(const glm::vec4& destRect, Texture texture, float depth, const Color& color);
+		void renderBatches();
 
 	private:
 		void createRenderBatches();
@@ -71,12 +71,12 @@ namespace lame {
 		static bool compareTexture(Glyph* a, Glyph* b);
 
 	private:
-		GlyphSortType            m_SortType;
-		glm::vec4				 m_DefaultUV;
-		GLuint                   m_Vbo;
-		GLuint                   m_Vao;
-		std::vector<Glyph*>      m_Glyphs;
-		std::vector<RenderBatch> m_Batches;
+		GlyphSortType            m_sortType;
+		glm::vec4				 m_defaultUV;
+		GLuint                   m_vbo;
+		GLuint                   m_vao;
+		std::vector<Glyph*>      m_glyphs;
+		std::vector<RenderBatch> m_batches;
 	};
 
 }

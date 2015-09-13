@@ -6,11 +6,11 @@
 namespace lame {
 
 	Engine::Engine(Display* display, double framerate)
-		: m_Display(display)
+		: m_display(display)
 	{
-		m_Frametime = 1.0 / framerate;
-		m_Width = display->GetWidth();
-		m_Height = display->GetHeight();
+		m_frametime = 1.0 / framerate;
+		m_width = display->getWidth();
+		m_height = display->getHeight();
 		
 		//m_Camera.Init(m_Width, m_Height);
 
@@ -28,7 +28,7 @@ namespace lame {
 		dispose();
 	}
 
-	void Engine::Run()
+	void Engine::run()
 	{
 		int frames = 0;
 		double unprocessedTime = 0.0;
@@ -36,7 +36,7 @@ namespace lame {
 
 		Uint32 previousTime = SDL_GetTicks();
 
-		while (!m_Display->IsClosed())
+		while (!m_display->isClosed())
 		{
 			bool shouldRender = false;
 
@@ -54,30 +54,30 @@ namespace lame {
 				frameCounterTime = 0.0;
 			}
 
-			while (unprocessedTime > m_Frametime)
+			while (unprocessedTime > m_frametime)
 			{
 				shouldRender = true;
 
-				m_Display->Update();
+				m_display->update();
 				update();
 				//m_Camera.Update();
 
-				unprocessedTime -= m_Frametime;
+				unprocessedTime -= m_frametime;
 			}
 
 			if (shouldRender)
 			{
 				frames++;
-				m_Display->Clear();
+				m_display->clear();
 				render();
-				m_Display->SwapBuffers();
+				m_display->swapBuffers();
 			}
 		}
 	}
 
 	void Engine::dispose()
 	{
-		m_Display->Dispose();
+		m_display->dispose();
 	}
 
 	void Engine::update()

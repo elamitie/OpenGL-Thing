@@ -17,24 +17,24 @@ namespace lame {
 		Display(int width, int height, const std::string& title, unsigned int flags = 0x0);
 		~Display();
 
-		void Update();
-		void SwapBuffers();
-		void Dispose();
-		void Clear();
+		void update();
+		void swapBuffers();
+		void dispose();
+		void clear();
 
-		inline bool IsClosed()  { return m_Closed; }
-		inline int  GetWidth()  { return m_Width; }
-		inline int  GetHeight() { return m_Height; }
+		inline bool isClosed()  { return m_closed; }
+		inline int  getWidth()  { return m_width; }
+		inline int  getHeight() { return m_height; }
 
 	private:
-		bool          m_Closed;
-		int           m_Width;
-		int           m_Height;
-		std::string   m_Title;
-		SDL_Window*   m_Window;
-		SDL_GLContext m_Context;
-		Keyboard	  m_Keyboard;
-		Mouse		  m_Mouse;
+		bool          m_closed;
+		int           m_width;
+		int           m_height;
+		std::string   m_title;
+		SDL_Window*   m_window;
+		SDL_GLContext m_context;
+		Keyboard	  m_keyboard;
+		Mouse		  m_mouse;
 	};
 
 }

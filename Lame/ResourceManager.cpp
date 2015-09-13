@@ -2,11 +2,11 @@
 
 namespace lame {
 
-	TextureCache ResourceManager::m_TextureCache;
+	TextureCache ResourceManager::m_textureCache;
 
-	Texture ResourceManager::GetTexture(const std::string& filepath)
+	Texture ResourceManager::getTexture(const std::string& filepath)
 	{
-		return m_TextureCache.GetTexture(filepath);
+		return m_textureCache.getTexture(filepath);
 	}
 
 }

@@ -11,14 +11,14 @@ namespace lame {
 	{
 	}
 
-	Texture TextureCache::GetTexture(const std::string& filepath)
+	Texture TextureCache::getTexture(const std::string& filepath)
 	{
-		auto iterator = m_TextureMap.find(filepath);
+		auto iterator = m_textureMap.find(filepath);
 
-		if (iterator == m_TextureMap.end())
+		if (iterator == m_textureMap.end())
 		{
-			Texture tex = ImageLoader::LoadPNG(filepath);
-			m_TextureMap.insert(std::make_pair(filepath, tex));
+			Texture tex = ImageLoader::loadPNG(filepath);
+			m_textureMap.insert(std::make_pair(filepath, tex));
 			return tex;
 		}
 
