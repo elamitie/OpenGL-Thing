@@ -18,4 +18,3 @@ private:
 	Camera2D camera;
 	Shader shader;
 };
-

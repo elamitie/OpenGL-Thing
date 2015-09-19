@@ -5,8 +5,9 @@
 #include "Sprite.h"
 #include "Shader.h"
 #include "Texture.h"
-#include "Camera2D.h"
+#include "Camera.h"
 #include "SpriteBatch.h"
+#include "Input.h"
 #include <vector>
 
 namespace lame {
@@ -26,6 +27,7 @@ namespace lame {
 
 	protected:
 		Display*    m_display;
+		Input*      m_input;
 		double      m_frametime;
 		int         m_width;
 		int         m_height;

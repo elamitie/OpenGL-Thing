@@ -1,7 +1,7 @@
 #include "Application.h"
 
 Application::Application(Display* display, double framerate)
-	:Engine(display, framerate)
+:Engine(display, framerate)
 {
 	camera.init(m_width, m_height);
 
@@ -21,6 +21,16 @@ Application::~Application()
 void Application::update()
 {
 	camera.update();
+	
+	if (m_input->keyHeld(SDL_SCANCODE_W))
+		camera.setPosition(camera.getPosition() + glm::vec2(0.0, 5.0));
+	else if (m_input->keyHeld(SDL_SCANCODE_S))
+		camera.setPosition(camera.getPosition() + glm::vec2(0.0, -5.0));
+	else if (m_input->keyHeld(SDL_SCANCODE_A))
+		camera.setPosition(camera.getPosition() + glm::vec2(-5.0, 0.0));
+	else if (m_input->keyHeld(SDL_SCANCODE_D))
+		camera.setPosition(camera.getPosition() + glm::vec2(5.0, 0.0));
+
 }
 
 void Application::render()

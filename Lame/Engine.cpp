@@ -1,5 +1,5 @@
 #include "Engine.h"
-#include "Keyboard.h"
+#include "Input.h"
 #include "ImageLoader.h"
 #include <iostream>
 
@@ -11,6 +11,7 @@ namespace lame {
 		m_frametime = 1.0 / framerate;
 		m_width = display->getWidth();
 		m_height = display->getHeight();
+		m_input = new Input();
 		
 		//m_Camera.Init(m_Width, m_Height);
 
@@ -58,9 +59,10 @@ namespace lame {
 			{
 				shouldRender = true;
 
-				m_display->update();
+				m_input->clearKeyboard();
+				m_input->clearMouse();
+				m_display->update(m_input);
 				update();
-				//m_Camera.Update();
 
 				unprocessedTime -= m_frametime;
 			}

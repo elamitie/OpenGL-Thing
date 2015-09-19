@@ -4,8 +4,7 @@
 #include <GL/glew.h>
 #include <string>
 
-#include "Keyboard.h"
-#include "Mouse.h"
+#include "Input.h"
 
 namespace lame {
 
@@ -17,7 +16,7 @@ namespace lame {
 		Display(int width, int height, const std::string& title, unsigned int flags = 0x0);
 		~Display();
 
-		void update();
+		void update(Input* input);
 		void swapBuffers();
 		void dispose();
 		void clear();
@@ -33,8 +32,6 @@ namespace lame {
 		std::string   m_title;
 		SDL_Window*   m_window;
 		SDL_GLContext m_context;
-		Keyboard	  m_keyboard;
-		Mouse		  m_mouse;
 	};
 
 }

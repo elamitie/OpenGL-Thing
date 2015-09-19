@@ -49,7 +49,7 @@ namespace lame {
 		dispose();
 	}
 
-	void Display::update()
+	void Display::update(Input* input)
 	{
 		SDL_Event e;
 
@@ -61,16 +61,16 @@ namespace lame {
 				m_closed = true;
 				break;
 			case SDL_KEYDOWN:
-				m_keyboard.handleKeyDown(e);
+				input->handleKeyDown(e);
 				break;
 			case SDL_KEYUP:
-				m_keyboard.handleKeyUp(e);
+				input->handleKeyUp(e);
 				break;
 			case SDL_MOUSEBUTTONDOWN:
-				m_mouse.handleMouseDown(e);
+				input->handleMouseDown(e);
 				break;
 			case SDL_MOUSEBUTTONUP:
-				m_mouse.handleMouseUp(e);
+				input->handleMouseUp(e);
 				break;
 			}
 		}
